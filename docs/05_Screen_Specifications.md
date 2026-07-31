@@ -4,6 +4,12 @@
 
 This document is the implementation contract for every PanoFolio screen. Screens are fully specified before coding begins.
 
+## Product priority
+
+The primary product is the desktop-first Workspace portal. Detailed screen specifications therefore begin with Authentication and Workspace management screens.
+
+The public Portfolio is the published output of Workspace content. Public screens remain required, but they are specified after the core management workflow.
+
 ## Screen specification template
 
 Every screen must use the following structure:
@@ -44,20 +50,6 @@ Every applicable outcome must be intentionally designed and implemented.
 
 ## Screen inventory
 
-### Public
-
-| ID | Screen | Primary role | Status |
-|---|---|---|---|
-| PUB-001 | Home | Public | Planned |
-| PUB-002 | Tour List | Public | Planned |
-| PUB-003 | Category List | Public | Planned |
-| PUB-004 | Category Details | Public | Planned |
-| PUB-005 | Tour Details | Public | Planned |
-| PUB-006 | Panorama Viewer | Public | Planned |
-| PUB-007 | About | Public | Planned |
-| PUB-008 | Contact | Public | Planned |
-| PUB-009 | Error Pages | Public | Planned |
-
 ### Authentication
 
 | ID | Screen | Primary role | Status |
@@ -68,47 +60,90 @@ Every applicable outcome must be intentionally designed and implemented.
 | AUTH-004 | Forgot Password | Public | Planned |
 | AUTH-005 | Reset Password | Public | Planned |
 
-### Visitor
+### Visitor account
 
 | ID | Screen | Primary role | Status |
 |---|---|---|---|
-| VIS-001 | Visitor Dashboard | Visitor | Planned |
-| VIS-002 | Creator Request | Visitor | Planned |
-| VIS-003 | Account | Visitor | Planned |
-| VIS-004 | Profile | Visitor | Planned |
-| VIS-005 | Security | Visitor | Planned |
-| VIS-006 | Appearance | Visitor | Planned |
-| VIS-007 | Notifications | Visitor | Planned |
+| VIS-001 | Account Overview | Visitor | Planned |
+| VIS-002 | Workspace Access Request | Visitor | Planned |
+| VIS-003 | Profile | Visitor | Planned |
+| VIS-004 | Security | Visitor | Planned |
+| VIS-005 | Appearance | Visitor | Planned |
+| VIS-006 | Notifications | Visitor | Planned |
 
-### Creator
+### Workspace portal
 
 | ID | Screen | Primary role | Status |
 |---|---|---|---|
-| CRE-001 | Creator Dashboard | Creator | Planned |
-| CRE-002 | Portfolio Overview | Creator | Planned |
-| CRE-003 | Portfolio Settings | Creator | Planned |
-| CRE-004 | Homepage Builder | Creator | Planned |
-| CRE-005 | Tour List | Creator | Planned |
-| CRE-006 | Create Tour | Creator | Planned |
-| CRE-007 | Edit Tour | Creator | Planned |
-| CRE-008 | Categories | Creator | Planned |
-| CRE-009 | Media Library | Creator | Planned |
-| CRE-010 | Profile | Creator | Planned |
-| CRE-011 | Settings | Creator | Planned |
+| WSP-001 | Workspace Dashboard | Workspace User | Next specification |
+| WSP-002 | Portfolio Overview | Workspace User | Planned |
+| WSP-003 | Portfolio General Information | Workspace User | Planned |
+| WSP-004 | Portfolio Contact Information | Workspace User | Planned |
+| WSP-005 | Portfolio SEO and Publishing | Workspace User | Planned |
+| WSP-006 | Experience List | Workspace User | Planned |
+| WSP-007 | Create Experience | Workspace User | Planned |
+| WSP-008 | Experience Editor | Workspace User | Planned |
+| WSP-009 | Scene and Panorama Manager | Workspace User | Planned |
+| WSP-010 | Categories | Workspace User | Planned |
+| WSP-011 | Media Library | Workspace User | Planned |
+| WSP-012 | Media Upload | Workspace User | Planned |
+| WSP-013 | Media Asset Details | Workspace User | Planned |
+| WSP-014 | Branding | Workspace User | Planned |
+| WSP-015 | Analytics | Workspace User | Planned |
+| WSP-016 | Workspace Settings | Workspace User | Planned |
+| WSP-017 | Support | Workspace User | Planned |
+
+### Public Portfolio
+
+| ID | Screen | Primary role | Status |
+|---|---|---|---|
+| PUB-001 | Portfolio Home | Public | Planned |
+| PUB-002 | Experience List | Public | Planned |
+| PUB-003 | Category List | Public | Planned |
+| PUB-004 | Category Details | Public | Planned |
+| PUB-005 | Experience Details | Public | Planned |
+| PUB-006 | Immersive Viewer | Public | Planned |
+| PUB-007 | About | Public | Planned |
+| PUB-008 | Contact | Public | Planned |
+| PUB-009 | Error Pages | Public | Planned |
 
 ### Administrator
 
 | ID | Screen | Primary role | Status |
 |---|---|---|---|
 | ADM-001 | Administrator Dashboard | Administrator | Planned |
-| ADM-002 | Creator Requests | Administrator | Planned |
-| ADM-003 | Users | Administrator | Planned |
-| ADM-004 | User Details | Administrator | Planned |
-| ADM-005 | Portfolios | Administrator | Planned |
-| ADM-006 | Portfolio Details | Administrator | Planned |
-| ADM-007 | Media | Administrator | Planned |
-| ADM-008 | Platform Settings | Administrator | Planned |
-| ADM-009 | Logs | Administrator | Planned |
+| ADM-002 | Workspace Access Requests | Administrator | Planned |
+| ADM-003 | Accounts | Administrator | Planned |
+| ADM-004 | Account Details | Administrator | Planned |
+| ADM-005 | Workspaces | Administrator | Planned |
+| ADM-006 | Workspace Details | Administrator | Planned |
+| ADM-007 | Portfolios | Administrator | Planned |
+| ADM-008 | Portfolio Details | Administrator | Planned |
+| ADM-009 | Media Administration | Administrator | Planned |
+| ADM-010 | Platform Settings | Administrator | Planned |
+| ADM-011 | Logs | Administrator | Planned |
+
+## Approved workflow priority
+
+```text
+Authentication
+↓
+Workspace Access Approval
+↓
+Workspace Dashboard
+↓
+Portfolio Configuration
+↓
+Media Upload and Library
+↓
+Experience Creation
+↓
+Scene and Interaction Editing
+↓
+Publishing
+↓
+Public Portfolio
+```
 
 ## Status progression
 
@@ -134,9 +169,16 @@ Every screen belongs to one primary navigation area. A screen may link to anothe
 
 Formal screen names must be explicit and consistent:
 
-- `Tour List`, not `Tours`
+- `Experience List`, not `Tours`
 - `Portfolio Overview`, not `My Portfolio Page`
-- `Creator Dashboard`, not `Dashboard Home`
+- `Workspace Dashboard`, not `Dashboard Home`
+- `Media Library`, not `Uploads`
+
+## Desktop-first rule
+
+Workspace upload and immersive editing screens are designed for desktop first.
+
+Tablet and mobile behavior must still be documented, but mobile parity must not be assumed for complex operations such as bulk upload, panorama sequencing, or hotspot placement.
 
 ## Definition of Done
 
@@ -158,47 +200,38 @@ A screen is complete only when:
 
 ---
 
-# PUB-001 — Home
+# WSP-001 — Workspace Dashboard
 
 ## Status
 
-Planned. Detailed specification is the next approved documentation task.
+Planned. This is the next full screen specification after the Information Architecture and Media model are approved.
 
 ## Purpose
 
-Serve as the public entry point for a Creator's Portfolio and guide visitors toward the Creator's work, featured Tours, Categories, profile information, and contact path.
+Provide the approved Workspace User with a desktop control centre immediately after login.
 
-## User Roles
+## Approved Dashboard boundaries
 
-- Unauthenticated Visitor
-- Authenticated Visitor
-- Creator viewing a published public Portfolio
-- Administrator when using the public route
+The Dashboard should summarize and link to management work. It must not duplicate full Portfolio, Experience, or Media editing interfaces.
 
-## Route
+Expected summary areas include:
 
-The final public Portfolio URL structure is not yet approved and must be defined before implementation.
-
-## Navigation Entry
-
-Public navigation: Home.
-
-## Approved boundaries
-
-The Home screen belongs to the public Portfolio experience. It must represent one Creator's single Portfolio and must not behave as a multi-creator marketplace homepage.
+- Portfolio publishing status
+- Draft and published Experience counts
+- Recent Media
+- Storage summary when supported
+- Recent activity
+- Quick actions
 
 ## Details still requiring design and approval
 
-- Final route format
-- Hero content and actions
-- Homepage section model and ordering
-- Featured Tour behavior
-- Category presentation
-- About preview
-- Contact call to action
-- Empty Portfolio behavior
-- Draft and unpublished Portfolio behavior
-- SEO metadata
+- Final route
+- Exact information hierarchy
+- Quick actions
+- First-use onboarding state
+- Empty Workspace state
+- Portfolio status model
+- Recent activity model
 - API contract
 - Database dependencies
 - Analytics events
