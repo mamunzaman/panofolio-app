@@ -2,77 +2,84 @@
 
 ## Overview
 
-PanoFolio Version 1 has three primary roles:
+PanoFolio Version 1 has three primary access roles:
 
 - Visitor
-- Creator
+- Workspace User
 - Administrator
 
 Role permissions are explicit and must be enforced in the user interface, API, and database access layer.
+
+`Workspace User` is the approved Version 1 management role. Product copy may later use an industry-specific label where appropriate, but internal architecture and permissions should use Workspace ownership rather than assuming every user identifies as a Creator.
 
 ## Visitor
 
 ### Description
 
-A registered user who can browse public content and manage a personal account.
+A registered or unauthenticated user who can browse published content. A registered Visitor may also manage a personal Account and request Workspace access.
 
 ### Capabilities
 
-- Register an account
+- Browse published Portfolios and Experiences
+- Register an Account
 - Verify email
 - Log in and log out
-- Browse public portfolios, categories, tours, and panorama experiences
-- Manage personal profile
-- Manage security preferences
-- Manage appearance preferences
-- Manage notification preferences
-- Request Creator access
-- View the status of a Creator request
+- Manage personal profile and security settings
+- Request Workspace access
+- View the status of an access request
 
 ### Restrictions
 
 A Visitor cannot:
 
-- Create or own a Portfolio
-- Upload portfolio media
-- Create Tours or Categories
-- Access Creator management screens
-- Approve Creator requests
+- Own or manage a Workspace
+- Create or manage a Portfolio
+- Upload Workspace Media
+- Create Experiences or Categories
+- Access Workspace management screens
+- Approve access requests
 - Manage other users
 
-## Creator
+## Workspace User
 
 ### Description
 
-An approved user who owns and manages exactly one Portfolio.
+An approved Account that owns and manages one Workspace in Version 1.
+
+The Workspace is the management boundary for Portfolio content, Experiences, Media, Categories, Branding, Analytics, and settings.
 
 ### Capabilities
 
-All Visitor capabilities, plus:
+All registered Visitor capabilities, plus:
 
-- Create one Portfolio after approval
-- Manage Portfolio information and settings
-- Configure the public homepage
-- Create, edit, publish, unpublish, and archive Tours
+- Enter the Workspace Dashboard after login
+- Configure one Workspace
+- Create and manage one public Portfolio
+- Configure Portfolio information, Branding, contact details, and publishing settings
+- Create, edit, publish, unpublish, and archive Experiences
+- Manage Experience types supported in the approved Version 1 scope
 - Create and manage Categories
-- Upload and manage Media
-- Manage the Creator profile associated with the Portfolio
-- Access Creator dashboard information
+- Upload, organize, select, reuse, and remove Media according to the Media specification
+- View Workspace analytics when implemented
+- Manage Workspace settings
 
 ### Ownership rule
 
-One Creator equals one Portfolio in Version 1.
+One approved Account equals one Workspace in Version 1.
 
-A Creator cannot create or own a second Portfolio. Any future support for teams, organizations, or multiple portfolios requires a new documented architectural decision.
+One Workspace owns one public Portfolio in Version 1.
+
+A Workspace User cannot create a second Workspace or second Portfolio. Future support for teams, organizations, additional Workspaces, or multiple Portfolios requires a documented architectural decision.
 
 ### Restrictions
 
-A Creator cannot:
+A Workspace User cannot:
 
-- Manage another Creator's Portfolio
-- Approve Creator requests
+- Manage another Account's Workspace
+- Access another Workspace's private Media
+- Approve access requests
 - Manage platform-wide settings
-- Access Administrator-only logs and controls
+- Access Administrator-only audit records and controls
 
 ## Administrator
 
@@ -82,44 +89,51 @@ A platform operator responsible for governance and platform management.
 
 ### Capabilities
 
-- Access Administrator dashboard
-- Review, approve, or reject Creator requests
-- View and manage users
-- View user details and role status
-- View and manage Portfolios
-- View Portfolio details
-- Review and manage Media
+- Access the Administrator Dashboard
+- Review, approve, or reject Workspace access requests
+- View and manage Accounts and role status
+- View and manage Workspaces
+- View and manage public Portfolios
+- Review Media where an approved moderation or support workflow permits it
 - Manage platform settings
 - View operational and audit Logs
 - Suspend or restrict access when supported by an approved workflow
 
 ### Restrictions
 
-Administrator actions must be auditable. Administrators must not silently modify Creator-owned content without a defined administrative action and recorded reason where required.
+Administrator actions must be auditable. Administrators must not silently modify Workspace-owned content without a defined administrative action and recorded reason where required.
 
 ## Role transition
 
 The approved transition is:
 
 ```text
-Register
+Register Account
 ↓
 Verify Email
 ↓
 Visitor
 ↓
-Request Creator Access
+Request Workspace Access
 ↓
 Administrator Review
 ↓
-Approved Creator
+Approved Workspace User
 ↓
-Create Portfolio
+Workspace Provisioned
 ↓
-Publish
+Dashboard
+↓
+Configure Portfolio and Publish
 ```
 
-A rejected request leaves the user as a Visitor.
+A rejected request leaves the Account as a Visitor.
+
+## Login destination
+
+- A Visitor lands on the Visitor account area or the route originally requested.
+- An approved Workspace User lands on the Workspace Dashboard by default.
+- An Administrator lands on the Administrator Dashboard by default.
 
 ## Permission enforcement
 
@@ -129,7 +143,9 @@ Permissions must be enforced at all relevant layers:
 - Route access
 - Screen actions
 - API authorization
+- Workspace ownership
 - Record ownership
+- Storage access
 - Database policies
 
 Hiding a button is not sufficient authorization.
@@ -141,9 +157,9 @@ When a user attempts an unauthorized action, the platform must:
 - Prevent the action
 - Return an appropriate authorization response
 - Show a clear permission-denied state or redirect
-- Avoid exposing restricted data
+- Avoid exposing restricted data or asset URLs
 - Record security-relevant events where appropriate
 
 ## Future roles
 
-Possible future roles include Organization Owner, Team Member, Editor, Reviewer, or Client. They are not part of Version 1 and must not be implemented without approval.
+Possible future roles include Workspace Owner, Organization Owner, Team Member, Editor, Reviewer, and Client. They are not part of Version 1 and must not be implemented without approval.
