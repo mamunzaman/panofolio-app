@@ -6,64 +6,167 @@ PanoFolio
 
 ## Product summary
 
-PanoFolio is a creator portfolio platform for building, managing, publishing, and sharing immersive 360-degree virtual tour experiences.
+PanoFolio is a desktop-first content management platform for building, managing, publishing, and sharing immersive portfolio experiences.
 
-The platform is designed first for independent creators who need a professional public portfolio and a private management dashboard. Its core architecture must remain flexible enough to support future use cases such as hotels, museums, architects, real estate, event venues, construction documentation, and digital twins.
+The primary product is the private Workspace portal. Approved users use the portal from a desktop browser to upload media, create immersive Experiences, configure a Portfolio, manage publishing, and maintain their public presence.
+
+The public Portfolio website is the published output of Workspace content. It is not the primary management product and Version 1 is not a multi-creator marketplace.
 
 ## Product vision
 
-Enable creators to present immersive work through a polished, structured, and scalable portfolio platform without requiring them to build and maintain a custom website.
+Enable professionals and organizations to manage immersive content through a structured Workspace and publish a polished public Portfolio without building or maintaining a custom website.
+
+## Primary product: Workspace portal
+
+The Workspace portal is the operational centre of PanoFolio.
+
+It provides:
+
+- Dashboard
+- Portfolio management
+- Experience management
+- Central Media library
+- Categories
+- Branding
+- Analytics
+- Settings
+
+After login, an approved Workspace user lands on the Dashboard.
+
+## Secondary product: Public Portfolio
+
+The public Portfolio is generated from published Workspace content.
+
+Visitors may:
+
+- View the Portfolio
+- Browse published Experiences
+- Open panorama and immersive viewers
+- View profile and contact information
+- Share public links
+
+The public Portfolio does not provide content-management controls.
+
+## Core domain model
+
+```text
+Account
+└── Workspace
+    ├── Dashboard
+    ├── Portfolio
+    ├── Experiences
+    ├── Media
+    ├── Categories
+    ├── Branding
+    ├── Analytics
+    └── Settings
+```
+
+A Workspace owns and manages the content used by its public Portfolio.
+
+## Version 1 ownership rule
+
+- An Account may browse public content and manage authentication details.
+- An Account may request access to create and manage immersive content.
+- An Administrator approves or rejects the access request.
+- An approved Account receives one Workspace in Version 1.
+- One Workspace owns one public Portfolio in Version 1.
+- A Workspace contains Experiences, Media, Categories, Branding, and settings.
+
+The architecture should not prevent multiple Workspaces or team members in a future version, but these capabilities are not approved for Version 1.
+
+## Experience model
+
+`Experience` is the primary content concept.
+
+An Experience may represent:
+
+- A virtual tour
+- A single panorama
+- A museum walkthrough
+- A hotel or property tour
+- A campus or venue tour
+- Construction progress
+- An interactive story
+- A future immersive format
+
+A Tour is one Experience type, not the entire domain model.
+
+## Media model
+
+Media is a central Workspace asset library rather than a collection of files owned only by one Experience.
+
+The intended workflow is:
+
+```text
+Upload Media
+↓
+Create Experience
+↓
+Attach Media
+↓
+Add structure and interactions
+↓
+Publish
+```
+
+Media may be reused where permitted by the approved Media specification.
 
 ## Version 1 scope
 
 Version 1 includes:
 
-- Public creator portfolios
-- Immersive tours and panorama scenes
-- Portfolio homepage management
-- Tour categories
-- Media management
-- Visitor registration and account management
-- Creator access requests
-- Administrator approval and platform management
+- Authentication and account management
+- Access request and administrator approval
+- One Workspace per approved Account
+- Creator Workspace Dashboard
+- One public Portfolio per Workspace
+- Portfolio configuration
+- Experience creation and management
+- Panorama and immersive scene management
+- Central Media library
+- Categories
+- Branding and contact information
+- Publishing workflow
+- Administrator governance
 
 ## Version 1 exclusions
 
-Version 1 is not a marketplace. It does not include:
+Version 1 is not a marketplace and does not include:
 
 - Buyer and seller transactions
 - Multi-vendor commerce
 - Public bidding
 - Booking commissions
-- Creator discovery rankings based on paid placement
-- Multiple portfolios per Creator
-
-## Core ownership model
-
-- A Visitor may browse and maintain an account.
-- A Visitor may request Creator access.
-- An Administrator approves or rejects Creator access.
-- A Creator owns exactly one Portfolio.
-- A Portfolio contains its public homepage, Tours, Categories, and Media.
+- Paid creator ranking
+- Multiple Workspaces per Account
+- Multiple public Portfolios per Workspace
+- Team membership or collaboration
+- Subscription billing unless separately approved
 
 ## Target users
 
-### Visitors
+### Public visitors
 
-People browsing immersive portfolios or maintaining a basic account.
+People viewing published Portfolios and immersive Experiences.
 
-### Creators
+### Workspace users
 
-Professionals who publish and manage immersive 360-degree work.
+Approved professionals or organizations that upload, organize, publish, and maintain immersive content.
+
+Examples include photographers, real-estate professionals, hotels, museums, architects, venues, campuses, and construction teams.
 
 ### Administrators
 
-Platform operators responsible for approvals, users, portfolios, media, settings, and logs.
+Platform operators responsible for access approval, users, Workspaces, Portfolios, Media governance, platform settings, and audit records.
 
 ## Product principles
 
 - Documentation first
-- Clear role boundaries
+- Desktop-first management workflow
+- Workspace-centred architecture
+- Clear role and ownership boundaries
+- Central reusable Media library
 - One source of truth
 - Reusable components
 - Accessible and responsive interfaces
@@ -73,28 +176,31 @@ Platform operators responsible for approvals, users, portfolios, media, settings
 
 ## Success criteria
 
-PanoFolio succeeds when a Creator can:
+PanoFolio succeeds when an approved user can:
 
-1. Receive approved Creator access.
-2. Create and configure one Portfolio.
-3. Build a professional public homepage.
-4. Upload and organize media.
-5. Create categories and tours.
-6. Publish immersive experiences.
-7. Maintain the portfolio without developer assistance.
+1. Log in and enter the Workspace Dashboard.
+2. Configure one Workspace and public Portfolio.
+3. Upload and organize reusable Media.
+4. Create and manage Experiences.
+5. Attach Media and configure immersive content.
+6. Publish Experiences and Portfolio updates.
+7. Maintain all content from a desktop browser without developer assistance.
 
 ## Future expansion
 
 The architecture should support later additions without redesigning the core domain, including:
 
+- Multiple Workspaces
 - Organization accounts
-- Industry-specific portfolio templates
-- Team collaboration
-- Analytics
+- Team collaboration and granular permissions
+- Multiple public Portfolios
+- Industry-specific Portfolio templates
+- Advanced analytics
 - Leads and contact management
-- Embeddable tours
+- Embeddable Experiences
 - Subscription plans
 - Custom domains
-- White-label experiences
+- White-label Experiences
+- Additional Experience types
 
 These are future considerations and are not approved Version 1 functionality unless separately documented.
