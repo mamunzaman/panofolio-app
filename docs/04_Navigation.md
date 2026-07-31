@@ -2,29 +2,48 @@
 
 ## Purpose
 
-This document defines the approved Version 1 navigation architecture. Every screen belongs to one primary navigation area. Role-specific navigation must reflect permissions without replacing server-side authorization.
+This document defines the approved Version 1 navigation architecture for PanoFolio. Every screen belongs to one primary navigation area. Role-specific navigation must reflect permissions without replacing server-side authorization.
 
 ## Product navigation model
 
 PanoFolio contains three distinct navigation contexts:
 
 1. Public Portfolio navigation for viewing published content
-2. Workspace portal navigation for desktop content management
+2. Creator Workspace navigation for managing Portfolio content and uploaded 360° projects
 3. Administrator navigation for platform governance
 
-The Workspace portal is the primary product interface.
+The Creator Workspace is the primary management interface.
+
+## Approved product terminology
+
+PanoFolio uses the following terms consistently:
+
+- **Portfolio** — the Creator's single public showcase within a Workspace.
+- **Category** — a curated public section of the Portfolio with its own hero image, title, description, order, and list of published Tour Projects.
+- **Tour Project** — one completed 360° virtual tour package created in third-party software and uploaded to PanoFolio as a ZIP file.
+- **Asset** — reusable media such as cover images, logos, videos, documents, and other Portfolio or Project presentation media.
+- **Version** — an immutable imported ZIP package belonging to a Tour Project.
+
+PanoFolio is not a panorama editor or tour-authoring tool. Hotspots, scenes, transitions, and navigation are created in third-party software before the ZIP package is uploaded.
 
 ## Public Portfolio navigation
 
 A published Portfolio may contain:
 
 - Portfolio Home
-- Experiences
-- Categories
+- Category pages
+- Individual Tour Project pages or direct tour viewer routes
 - About
 - Contact
 
-The exact visible items may depend on published content and Portfolio configuration. Public navigation must never expose draft or private content.
+Each Category page may contain:
+
+- Hero image
+- Category title
+- Category description
+- Ordered list or grid of published Tour Projects assigned to that Category
+
+Public navigation must never expose draft, processing, failed, archived, private, or unpublished content.
 
 ## Shared account navigation
 
@@ -44,26 +63,25 @@ These destinations are separate from Workspace-owned content settings.
 Registered Visitors have access to:
 
 - Account Overview
-- Workspace Access Request
+- Creator Access Request
 - Profile
 - Security
 - Appearance
 - Notifications
 
-The Workspace Access Request destination shows the request form or current request status.
+The Creator Access Request destination shows the request form or current request status.
 
-## Workspace portal navigation
+## Creator Workspace navigation
 
-Approved Workspace Users land on `Dashboard` after login.
+Approved Creators land on `Dashboard` after login.
 
 The approved high-level navigation is:
 
 - Dashboard
 - Portfolio
-- Experiences
-- Media
 - Categories
-- Branding
+- Tour Projects
+- Assets
 - Analytics
 - Settings
 - Support
@@ -72,71 +90,100 @@ The approved high-level navigation is:
 
 Owns the operational overview, including:
 
-- Portfolio status
-- Draft and published Experience summaries
-- Recent Media
-- Storage summary when supported
+- Portfolio publishing status
+- Published and draft Tour Project summaries
+- Recent Tour Projects
+- Recent Assets
+- Storage summary
 - Recent activity
 - Quick actions
 
 ### Portfolio
 
-Owns the public Portfolio configuration:
+Owns the Creator's single public Portfolio configuration:
 
 - Portfolio Overview
-- General Information
-- Contact Information
-- SEO
+- Portfolio hero image
+- Portfolio title and description
+- About information
+- Contact information
+- Category ordering
+- SEO metadata
 - Publishing status
+- Public Portfolio preview
 
-A separate generic website or Homepage Builder is not part of the approved architecture. Public Portfolio composition must be defined as structured Portfolio configuration rather than an unrestricted website builder unless separately approved.
-
-### Experiences
-
-Owns immersive content management:
-
-- All Experiences
-- Create Experience
-- Draft Experiences
-- Published Experiences
-- Archived Experiences
-- Experience Editor
-- Scene or Panorama Manager
-- Hotspot and interaction configuration where approved
-
-`Experience` is the primary domain term. A virtual Tour is one Experience type.
-
-### Media
-
-Owns the central Workspace asset library:
-
-- All Media
-- Panoramas
-- Images
-- Videos
-- Documents
-- Uploads
-- Asset details and usage
-
-Media is uploaded to the Workspace library and may then be attached to Experiences or Portfolio content according to the Media specification.
+Portfolio is not an unrestricted website builder. Version 1 uses structured fields and ordered Categories.
 
 ### Categories
 
-Owns Experience categorization and ordering.
+Owns public Portfolio organization:
 
-### Branding
+- All Categories
+- Create Category
+- Category details
+- Hero image
+- Title
+- Description
+- Slug
+- Display order
+- Visibility or publishing state
+- Assigned Tour Projects
+- Tour Project ordering within the Category
 
-Owns public visual identity:
+A Category becomes a separate public Portfolio page when published.
 
-- Logo
-- Colours
-- Typography options where supported
-- Cover and social images
-- Brand presentation settings
+Deleting a Category must not delete its Tour Projects. Affected Tour Projects become uncategorized until reassigned.
+
+### Tour Projects
+
+Owns individual uploaded 360° packages:
+
+- All Tour Projects
+- Create Tour Project
+- Project information
+- Category assignment
+- Cover image
+- ZIP upload
+- ZIP validation
+- Version history
+- Preview
+- Publish or unpublish
+- Project analytics
+- Archive or delete
+
+A Tour Project represents one completed virtual tour created in third-party software. PanoFolio stores, validates, versions, publishes, and serves the package without editing its internal authoring structure.
+
+### Assets
+
+Owns the central reusable Workspace Asset Library:
+
+- All Assets
+- Images
+- Panoramas used as reusable presentation media
+- Videos
+- Floor plans
+- Logos
+- Documents
+- Uploads
+- Asset details
+- Asset usage
+
+Tour Project ZIP packages and extracted package files must not appear in the reusable Asset Library.
 
 ### Analytics
 
-Owns approved Portfolio and Experience performance reporting. Analytics may be limited or deferred in Version 1 according to the Roadmap.
+Owns approved Portfolio, Category, and Tour Project performance reporting.
+
+Version 1 may include:
+
+- Portfolio views
+- Category views
+- Tour Project views
+- Unique visitors
+- Average viewing time
+- Device breakdown
+- Traffic sources
+- Leads where supported
 
 ### Settings
 
@@ -145,64 +192,89 @@ Owns Workspace-level configuration not assigned elsewhere:
 - Workspace details
 - Publishing defaults
 - Storage information
-- Integrations or API keys when separately approved
+- Account preferences
+- Integrations when separately approved
 - Destructive actions
+
+Branding customization is not a Version 1 priority. Only fields required for the Portfolio presentation should be exposed.
 
 ### Support
 
-Owns help, documentation, and support contact paths.
+Owns help, documentation, ZIP upload guidance, and support contact paths.
 
 ## Administrator navigation
 
 Administrators have access to:
 
 - Dashboard
-- Access Requests
+- Creator Requests
 - Accounts
 - Workspaces
 - Portfolios
-- Media
+- Categories
+- Tour Projects
+- Assets
 - Platform
 - Logs
 
-### Navigation ownership
+## Primary Creator workflow
 
-- Access Requests owns Workspace access approval workflows.
-- Accounts owns user listing and Account details.
-- Workspaces owns Workspace listing and management.
-- Portfolios owns public Portfolio listing and status.
-- Media owns approved platform-level Media review and administration.
-- Platform owns platform-wide settings.
-- Logs owns operational and audit records.
+```text
+Create or configure Portfolio
+        ↓
+Create Category
+        ↓
+Create Tour Project
+        ↓
+Assign Category
+        ↓
+Upload completed 360° ZIP package
+        ↓
+Validate package
+        ↓
+Preview
+        ↓
+Publish Tour Project
+        ↓
+Tour Project appears on its public Category page
+```
+
+A Creator may create Tour Projects before Categories, but a published Tour Project should normally be assigned to a published Category to appear in the public Portfolio navigation.
 
 ## Navigation rules
 
 - Every screen belongs to one primary navigation area.
 - Labels must use approved product terminology.
+- `Tour Projects` must be used instead of `Experiences`.
+- `Assets` must be used instead of `Media` in the Creator Workspace.
+- Portfolio, Categories, and Tour Projects must remain separate concepts.
 - Workspace navigation must be optimized for frequent desktop management work.
 - Navigation must not expose inaccessible destinations.
-- Direct access to a restricted route must still be blocked by authorization.
+- Direct access to restricted routes must still be blocked by authorization.
 - Active navigation state must be clear.
 - Parent destinations remain active for nested screens.
 - Back navigation must not lose unsaved work without warning.
 - Public and private navigation contexts must remain visually and technically distinct.
 
-## Naming rules
+## Formal screen naming
 
-Use explicit formal screen names:
+Use explicit screen names:
 
-- `Experience List`, not merely `Experiences`, when identifying a screen specification.
-- `Portfolio Overview`, not `My Portfolio Page`.
-- `Workspace Dashboard`, not `Dashboard Home`.
-- `Media Library`, not `Uploads` when referring to the complete asset-management screen.
-
-Navigation labels may remain concise, while formal screen names follow the screen inventory.
+- `Workspace Dashboard`
+- `Portfolio Overview`
+- `Category List`
+- `Category Details`
+- `Tour Project List`
+- `Tour Project Details`
+- `Create Tour Project`
+- `Upload Tour ZIP`
+- `Asset Library`
 
 ## Responsive navigation
 
 ### Desktop
 
-The Workspace portal should use a persistent sidebar or an equivalently efficient navigation pattern. Desktop is the primary content-upload and editing environment.
+The Creator Workspace uses a persistent sidebar or an equivalently efficient navigation pattern. Desktop is the primary ZIP upload and content-management environment.
 
 ### Tablet
 
@@ -210,9 +282,7 @@ Navigation may collapse while preserving hierarchy, active state, and access to 
 
 ### Mobile
 
-Mobile access may support review and lightweight management, but complex upload and immersive editing workflows are desktop-first. Mobile navigation must avoid implying that every desktop workflow is fully supported unless documented per screen.
-
-Detailed responsive behavior is defined per screen and later in the Design System and UI Guidelines.
+Mobile access may support Portfolio browsing, preview, analytics review, and lightweight management. Large ZIP upload and detailed content management remain desktop-first unless explicitly supported later.
 
 ## Access outcomes
 
@@ -220,9 +290,11 @@ Navigation or route access may resolve to:
 
 - Screen loaded successfully
 - Authentication required
-- Workspace access required
+- Creator access required
 - Permission denied
 - Resource not found
-- Portfolio or content unavailable
+- Portfolio unavailable
+- Category unavailable
+- Tour Project unavailable
 
 These outcomes must be intentionally designed rather than left to generic browser behavior.
